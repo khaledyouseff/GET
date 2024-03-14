@@ -10,6 +10,9 @@ import pages.signUpPage;
 
 import java.time.Duration;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 public class signUpTest extends baseTest.baseTest {
 
     @Test
@@ -20,22 +23,28 @@ public class signUpTest extends baseTest.baseTest {
         signUpPage signUpPage = new signUpPage(driver);
         signUpPage.setFirstName("KHALED");
         signUpPage.setLastName("yousef");
-        signUpPage.clickCountryName();
-        signUpPage.TypeCountryName("EGYPT");
-        signUpPage.selectCountry();
-        signUpPage.setPhone("01140342431");
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
-        signUpPage.setPassword("Khaledyousef");
+        signUpPage.setPhone("01140342431");
         signUpPage.scrollDown();
 
-        WebElement iframeElement = driver.findElement(By.xpath("//iframe[@title='reCAPTCHA']"));
-        driver.switchTo().frame(iframeElement);
-        //  wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("/html/body/div[4]/form/div/div/div/div[6]/div/div/iframe")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@title='reCAPTCHA']")));
-        signUpPage.clickRobot();
-        driver.switchTo().defaultContent();
 
-        signUpPage.clickSignUp();
+        String option ="Selenium Automation";
+        signUpPage.selectCourseDropDownElement(option);
+        var selectedOption = signUpPage.getSelectedCourseOption();
+        assertEquals(selectedOption.size(), 1 , "incorrect number of selections");
+        assertTrue(selectedOption.contains(option),"incorrect option");
+
+        String option1 ="January";
+        signUpPage.selectMonthDropDownElement(option1);
+        var selectedOption1 = signUpPage.getSelectedMonthOption();
+        assertEquals(selectedOption.size(), 1 , "incorrect number of selections");
+        assertTrue(selectedOption1.contains(option1),"incorrect option");
+        signUpPage.checkHowDidYouKnowAboutUs();
+        signUpPage.scrollDown();
+        signUpPage.clickRegister();
+
+
+
 
 
 

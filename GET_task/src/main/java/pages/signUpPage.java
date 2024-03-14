@@ -12,15 +12,16 @@ import java.util.stream.Collectors;
 
 public class signUpPage {
 
-    By firstName = By.id("firstname");
-    By lastName = By.id("last_name");
-    By countryName = By.cssSelector("div.filter-option-inner-inner");
-    By country = By.xpath("//*[@id=\"bs-select-1-63\"]/span/span");
-    By phone = By.id("phone");
-    By email = By.id("user_email");
-    By password = By.id("password");
-    By robot = By.xpath("/html/body/div[2]/div[3]/div[1]/div/div/span/div[1]");
-    By signUp = By.id("submitBTN");
+    By firstName = By.id("nf-field-17");
+    By lastName = By.id("nf-field-18");
+
+    By phone = By.id("nf-field-20");
+    By email = By.id("nf-field-19");
+
+    By course = By.id("nf-field-22");
+    By month = By.id("nf-field-24");
+    By check = By.id("nf-label-class-field-23-0");
+    By register = By.id("nf-field-15");
 
     WebDriver driver;
 
@@ -36,21 +37,6 @@ public class signUpPage {
         driver.findElement(lastName).sendKeys(name2);
     }
 
-    //dropdown ----------------------------------------------------------------------
-    public void clickCountryName() {
-        driver.findElement(countryName).click();
-    }
-
-    public void TypeCountryName(String country) {
-        driver.findElement(By.cssSelector("input.form-control")).sendKeys(country);
-    }
-
-    public void selectCountry() {
-        driver.findElement(country).click();
-    }
-
-
-//End of DropDown ----------------------------------------------------------------------
 
     public void setEmail(String mail) {
         driver.findElement(email).sendKeys(mail);
@@ -59,17 +45,45 @@ public class signUpPage {
     public void setPhone(String phone1) {
         driver.findElement(phone).sendKeys(phone1);
     }
-
-    public void setPassword(String password1) {
-        driver.findElement(password).sendKeys(password1);
+    // select course from dropDown--------------------------------------------------------------
+    public Select findCourseDropDown(){
+         return new Select(driver.findElement(course));
     }
+    public void selectCourseDropDownElement(String option) {
 
-    public void clickRobot() {
-        driver.findElement(robot).click();
+        findCourseDropDown().selectByVisibleText(option);
     }
+        public List<String> getSelectedCourseOption() {
+            List<WebElement> selectedCourseElement =
+                    findCourseDropDown().getAllSelectedOptions();
+            return selectedCourseElement.stream().map(e -> e.getText()).collect(Collectors.toList());
 
-    public void clickSignUp() {
-        driver.findElement(signUp).click();
+        }
+    //End of Drop Down code--------------------------------------------------------------
+// select month from dropDown--------------------------------------------------------------
+    public Select findMonthDropDown(){
+        return new Select(driver.findElement(month));
+    }
+    public void selectMonthDropDownElement(String option) {
+
+        findMonthDropDown().selectByVisibleText(option);
+    }
+    public List<String> getSelectedMonthOption() {
+        List<WebElement> selectedMonthElement =
+                findMonthDropDown().getAllSelectedOptions();
+        return selectedMonthElement.stream().map(e -> e.getText()).collect(Collectors.toList());
+
+    }
+    //End of Drop Down code--------------------------------------------------------------
+
+public void checkHowDidYouKnowAboutUs(){
+        driver.findElement(check).click();
+}
+
+
+
+    public void clickRegister() {
+        driver.findElement(register).click();
     }
 
     public void scrollDown() {

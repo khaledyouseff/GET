@@ -15,7 +15,7 @@ public class baseTest {
         WebDriverManager.chromedriver().browserVersion("122.0.6261.129").setup();
         driver=new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://phptravels.net/signup");
+        driver.get("https://codenboxautomationlab.com/registration-form/");
 
     }
 
