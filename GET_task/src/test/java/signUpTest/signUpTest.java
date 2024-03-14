@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pages.signUpPage;
+import pages.successfulSignUpPage;
 
 import java.time.Duration;
 
@@ -21,6 +22,7 @@ public class signUpTest extends baseTest.baseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         signUpPage signUpPage = new signUpPage(driver);
+        successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
         signUpPage.setFirstName("KHALED");
         signUpPage.setLastName("yousef");
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
@@ -42,6 +44,12 @@ public class signUpTest extends baseTest.baseTest {
         signUpPage.checkHowDidYouKnowAboutUs();
         signUpPage.scrollDown();
         signUpPage.clickRegister();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/main/article/div/div[1]/div/div[1]/p")));
+        String x =successfulSignUpPage.findText();
+        assertEquals(x, "Your registration is completed. We will contact with you soon. Thank you !", "invalid");
+
+
+
 
 
 

@@ -82,8 +82,9 @@ public void checkHowDidYouKnowAboutUs(){
 
 
 
-    public void clickRegister() {
+    public successfulSignUpPage clickRegister() {
         driver.findElement(register).click();
+        return new successfulSignUpPage(driver);
     }
 
     public void scrollDown() {
