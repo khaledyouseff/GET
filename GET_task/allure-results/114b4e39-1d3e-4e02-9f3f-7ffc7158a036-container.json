@@ -1,0 +1,1 @@
+{"uuid":"114b4e39-1d3e-4e02-9f3f-7ffc7158a036","name":"signUpTest.badSenariosSignUp","children":["f0992f47-579f-471f-b7a9-f407b43bbe81"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1710389350071,"stop":1710389356280}],"afters":[],"start":1710389350022,"stop":1710389362466}

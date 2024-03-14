@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="E:/valeo prepration/iti studying/testing/automation/GET task/GET/GET_task">
+        <classes>
+            <class name="signUpTest.badSenariosSignUp">
+                <methods>
+                    <include name="successfulSignUPTest"/>
+                </methods>
+            </class>
+            <class name="signUpTest.signUpTest">
+                <methods>
+                    <include name="successfulSignUPTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
