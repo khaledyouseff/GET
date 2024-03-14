@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.signUpPage;
 import pages.successfulSignUpPage;
 
@@ -15,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class badSenariosSignUp extends baseTest.baseTest {
     @Test
-    public void successfulSignUPTest() throws InterruptedException {
+    public void verifyFirstNameTest() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
@@ -23,8 +24,12 @@ public class badSenariosSignUp extends baseTest.baseTest {
         successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
         //NOT starting with capital letter
         signUpPage.setFirstName("khaled");
+        String expectedText = "Khaled";
+        String actualText = driver.findElement(By.id("nf-field-17")).getText();
+       Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
 
-        
+
+
         signUpPage.setLastName("yousef");
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
         signUpPage.setPhone("01140342431");
@@ -51,4 +56,6 @@ public class badSenariosSignUp extends baseTest.baseTest {
 
 
     }
+
+
 }
