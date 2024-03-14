@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ISelect;
@@ -11,55 +12,68 @@ import java.util.stream.Collectors;
 
 public class signUpPage {
 
-By firstName = By.id("firstname");
-By lastName = By.id("last_name");
-By countryName = By.cssSelector("div.filter-option-inner-inner");
-By phone = By.id("phone");
-By email = By.id("user_email");
-By password = By.id("password");
-By robot = By.id("recaptcha-anchor-label");
-By signUp = By.id("submitBTN");
+    By firstName = By.id("firstname");
+    By lastName = By.id("last_name");
+    By countryName = By.cssSelector("div.filter-option-inner-inner");
+    By country = By.xpath("//*[@id=\"bs-select-1-63\"]/span/span");
+    By phone = By.id("phone");
+    By email = By.id("user_email");
+    By password = By.id("password");
+    By robot = By.xpath("/html/body/div[2]/div[3]/div[1]/div/div/span/div[1]");
+    By signUp = By.id("submitBTN");
 
-    WebDriver driver ;
-    public signUpPage(WebDriver driver){
-        this.driver=driver;
+    WebDriver driver;
+
+    public signUpPage(WebDriver driver) {
+        this.driver = driver;
     }
-    public void setFirstName(String name1){
+
+    public void setFirstName(String name1) {
         driver.findElement(firstName).sendKeys(name1);
     }
-    public void setLastName(String name2){
+
+    public void setLastName(String name2) {
         driver.findElement(lastName).sendKeys(name2);
     }
-//dropdown ----------------------------------------------------------------------
 
-    public Select findDropDown(){
-        return new Select(driver.findElement(countryName));
+    //dropdown ----------------------------------------------------------------------
+    public void clickCountryName() {
+        driver.findElement(countryName).click();
     }
-public void setCountryName(String countryName){
-        driver.findElement(By.cssSelector("input.form-control"));
-}
-    public void selectDropDownElement(String option){
-        findDropDown().selectByVisibleText(option);
-    }
-    public List<String> getSelectedOption(){
-        List<WebElement> selectedElement=
-                findDropDown().getAllSelectedOptions();
-        return selectedElement.stream().map(e->e.getText()).collect(Collectors.toList());
 
+    public void TypeCountryName(String country) {
+        driver.findElement(By.cssSelector("input.form-control")).sendKeys(country);
     }
+
+    public void selectCountry() {
+        driver.findElement(country).click();
+    }
+
+
 //End of DropDown ----------------------------------------------------------------------
 
-    public void setEmail(String mail){
+    public void setEmail(String mail) {
         driver.findElement(email).sendKeys(mail);
     }
-    public void setPassword(String password1){
+
+    public void setPhone(String phone1) {
+        driver.findElement(phone).sendKeys(phone1);
+    }
+
+    public void setPassword(String password1) {
         driver.findElement(password).sendKeys(password1);
     }
 
-    public void clickRobot(){
+    public void clickRobot() {
         driver.findElement(robot).click();
     }
-    public void clickSignUp(){
+
+    public void clickSignUp() {
         driver.findElement(signUp).click();
+    }
+
+    public void scrollDown() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("scrollBy(0,500)");
     }
 }
