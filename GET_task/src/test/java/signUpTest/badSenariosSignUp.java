@@ -16,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class badSenariosSignUp extends baseTest.baseTest {
     @Test
-    public void verifyFirstNameTest() throws InterruptedException {
+    public void verifyFirstNameAndLastNameCapitalLetterTest() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
@@ -24,13 +24,53 @@ public class badSenariosSignUp extends baseTest.baseTest {
         successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
         //NOT starting with capital letter
         signUpPage.setFirstName("khaled");
-        String expectedText = "Khaled";
-        String actualText = driver.findElement(By.id("nf-field-17")).getText();
-       Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
+        //String expectedText = "Khaled";
+        //String actualText = driver.findElement(By.id("nf-field-17")).getText();
+       //Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
 
 
 
         signUpPage.setLastName("yousef");
+        signUpPage.setEmail("khaledYoussouph36@gmail.com");
+        signUpPage.setPhone("01140342431");
+        signUpPage.scrollDown();
+
+
+        String option = "Selenium Automation";
+        signUpPage.selectCourseDropDownElement(option);
+        var selectedOption = signUpPage.getSelectedCourseOption();
+        assertEquals(selectedOption.size(), 1, "incorrect number of selections");
+        assertTrue(selectedOption.contains(option), "incorrect option");
+
+        String option1 = "January";
+        signUpPage.selectMonthDropDownElement(option1);
+        var selectedOption1 = signUpPage.getSelectedMonthOption();
+        assertEquals(selectedOption.size(), 1, "incorrect number of selections");
+        assertTrue(selectedOption1.contains(option1), "incorrect option");
+        signUpPage.checkHowDidYouKnowAboutUs();
+        signUpPage.scrollDown();
+        signUpPage.clickRegister();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/main/article/div/div[1]/div/div[1]/p")));
+        String successfulRegistrationMessage = successfulSignUpPage.findText();
+        assertEquals(successfulRegistrationMessage, "Your registration is completed. We will contact with you soon. Thank you !", "invalid");
+
+
+    }
+    @Test
+    public void verifyFirstNameAndLastNameAreNotEqualsTest() throws InterruptedException {
+        // it’s a bug because first name and last name must Not be equals but the registration succeeded
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        signUpPage signUpPage = new signUpPage(driver);
+        successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
+        //NOT starting with capital letter
+        signUpPage.setFirstName("Khaled");
+        //String expectedText = "Khaled";
+        //String actualText = driver.findElement(By.id("nf-field-17")).getText();
+        //Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
+
+        signUpPage.setLastName("Khaled");
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
         signUpPage.setPhone("01140342431");
         signUpPage.scrollDown();
