@@ -1,20 +1,27 @@
 package signUpTest;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import pages.signUpPage;
 import pages.successfulSignUpPage;
 
+import java.io.File;
 import java.time.Duration;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class badSenariosSignUp extends baseTest.baseTest {
+public class badScenariosSignUp extends baseTest.baseTest {
+
+
+
     @Test
     public void verifyFirstNameAndLastNameCapitalLetterTest() throws InterruptedException {
         // it’s a bug because first name and last name must start with capital letter
@@ -25,11 +32,6 @@ public class badSenariosSignUp extends baseTest.baseTest {
         successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
         //NOT starting with capital letter
         signUpPage.setFirstName("khaled"); // starts with small letter
-        //String expectedText = "Khaled";
-        //String actualText = driver.findElement(By.id("nf-field-17")).getText();
-       //Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
-
-
 
         signUpPage.setLastName("yousef"); // starts with small letter
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
@@ -50,10 +52,13 @@ public class badSenariosSignUp extends baseTest.baseTest {
         assertTrue(selectedOption1.contains(option1), "incorrect option");
         signUpPage.checkHowDidYouKnowAboutUs();
         signUpPage.scrollDown();
+
+        //WebElement registerButton=driver.findElement(By.id("nf-field-15"));
+        //Assert.assertTrue(registerButton.isDisplayed() , "this is a bug");
         signUpPage.clickRegister();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/main/article/div/div[1]/div/div[1]/p")));
-        String successfulRegistrationMessage = successfulSignUpPage.findText();
-        assertEquals(successfulRegistrationMessage, "Your registration is completed. We will contact with you soon. Thank you !", "invalid");
+        WebElement errorMessage =driver.findElement(By.xpath("//*[@id=\"nf-form-errors-3\"]/nf-errors/nf-section/div"));
+        Assert.assertEquals(errorMessage.getText() , "Please correct errors before submitting this form.");
+
 
 
     }
@@ -66,16 +71,12 @@ public class badSenariosSignUp extends baseTest.baseTest {
 
         signUpPage signUpPage = new signUpPage(driver);
         successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
-        signUpPage.setFirstName("Khaled");
-        //String expectedText = "Khaled";
-        //String actualText = driver.findElement(By.id("nf-field-17")).getText();
-        //Assert.assertEquals(expectedText , actualText , "first name must start with capital letter");
+        signUpPage.setFirstName("Khaled"); //First name = Last name
+        signUpPage.setLastName("Khaled");  //First name = Last name
 
-        signUpPage.setLastName("Khaled");
         signUpPage.setEmail("khaledYoussouph36@gmail.com");
         signUpPage.setPhone("01140342431");
         signUpPage.scrollDown();
-
 
         String option = "Selenium Automation";
         signUpPage.selectCourseDropDownElement(option);
@@ -91,10 +92,9 @@ public class badSenariosSignUp extends baseTest.baseTest {
         signUpPage.checkHowDidYouKnowAboutUs();
         signUpPage.scrollDown();
         signUpPage.clickRegister();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/main/article/div/div[1]/div/div[1]/p")));
-        String successfulRegistrationMessage = successfulSignUpPage.findText();
-        assertEquals(successfulRegistrationMessage, "Your registration is completed. We will contact with you soon. Thank you !", "invalid");
 
+        WebElement errorMessage =driver.findElement(By.xpath("//*[@id=\"nf-form-errors-3\"]/nf-errors/nf-section/div"));
+        Assert.assertEquals(errorMessage.getText() , "Please correct errors before submitting this form.");
 
     }
     @Test
@@ -105,6 +105,8 @@ public class badSenariosSignUp extends baseTest.baseTest {
 
         signUpPage signUpPage = new signUpPage(driver);
         successfulSignUpPage successfulSignUpPage = new successfulSignUpPage(driver);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nf-field-17")));
+
         signUpPage.setFirstName("Khaled");
 
         signUpPage.setLastName("Yousef");
@@ -127,10 +129,8 @@ public class badSenariosSignUp extends baseTest.baseTest {
         signUpPage.checkHowDidYouKnowAboutUs();
         signUpPage.scrollDown();
         signUpPage.clickRegister();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/main/article/div/div[1]/div/div[1]/p")));
-        String successfulRegistrationMessage = successfulSignUpPage.findText();
-        assertEquals(successfulRegistrationMessage, "Your registration is completed. We will contact with you soon. Thank you !", "invalid");
-
+        WebElement errorMessage =driver.findElement(By.xpath("//*[@id=\"nf-form-errors-3\"]/nf-errors/nf-section/div"));
+        Assert.assertEquals(errorMessage.getText() , "Please correct errors before submitting this form.");
 
     }
 

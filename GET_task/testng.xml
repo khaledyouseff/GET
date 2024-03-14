@@ -4,16 +4,22 @@
     <test verbose="2" preserve-order="true"
           name="E:/valeo prepration/iti studying/testing/automation/GET task/GET/GET_task">
         <classes>
-            <class name="signUpTest.badSenariosSignUp">
-                <methods>
-                    <include name="successfulSignUPTest"/>
-                </methods>
+
+            <class name="signUpTest.badScenariosSignUp">
+            <methods>
+                <include name="verifyFirstNameAndLastNameAreNotEqualsTest"/>
+                <include name="invalidPhoneNumberTest"/>
+                <include name="verifyFirstNameAndLastNameCapitalLetterTest"/>
+            </methods>
             </class>
+
             <class name="signUpTest.signUpTest">
                 <methods>
                     <include name="successfulSignUPTest"/>
                 </methods>
             </class>
+
+
         </classes>
     </test>
 </suite>
