@@ -1,8 +1,8 @@
 package baseTest;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.google.common.io.Files;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -29,18 +29,19 @@ public class baseTest {
 
     }
 
-    /*
+
     @AfterMethod
     public void tearDown(){
         this.driver.quit();
     }
-*/
+
     @AfterMethod
-    public void takeScreenShot(ITestResult result){
+    public void takeScreenShot(ITestResult result) throws IOException {
         if(ITestResult.FAILURE == result.getStatus()){
             //create reference of taken screen
             TakesScreenshot ts = (TakesScreenshot)driver;
             File src = ts.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(src ,new File("./screenShots/" + result.getName()+".png"));
 
         }
     }
