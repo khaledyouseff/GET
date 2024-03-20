@@ -5,7 +5,7 @@
           name="E:/valeo prepration/iti studying/testing/automation/GET task/GET/GET_task">
         <classes>
 
-            <class name="signUpTest.badScenariosSignUp">
+            <class name="registerTest.badScenariosRegister">
             <methods>
                 <include name="verifyFirstNameAndLastNameAreNotEqualsTest"/>
                 <include name="invalidPhoneNumberTest"/>
@@ -13,7 +13,7 @@
             </methods>
             </class>
 
-            <class name="signUpTest.signUpTest">
+            <class name="registerTest.registerTest">
                 <methods>
                     <include name="successfulSignUPTest"/>
                 </methods>
